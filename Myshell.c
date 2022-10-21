@@ -59,6 +59,7 @@ int main(){
     }
     else if(strcmp(string[0], "pwd") == 0){
         char WD[1000];
+        printf("%d\n", i);
         if(i == 1){
             printf("%s\n", getcwd(WD,sizeof(WD)));
         }
