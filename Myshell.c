@@ -2,6 +2,7 @@
 #include<stdlib.h>
 #include<unistd.h>
 #include<string.h>
+#include<limits.h>
 #include<sys/wait.h>
 
 int main(){
@@ -36,7 +37,7 @@ int main(){
                 }
             }
         }
-        if(strcmp(string[1], "--help") == 0){
+        else if(strcmp(string[1], "--help") == 0){
             FILE* ptr;
             char ch;
             ptr = fopen("echo.txt", "r");
@@ -49,14 +50,34 @@ int main(){
         else{
             for(int j = 1; j < i; j++){
                 printf("%s", string[j]);
-                printf(" ")
+                printf(" ");
             }
             printf("\n");
         }
     }
     else if(strcmp(string[0], "cd") == 0){   
     }
-    else if(strcmp(string[0], "pwd") == 0){}
+    else if(strcmp(string[0], "pwd") == 0){
+        char WD[1000];
+        if(i == 1){
+            printf("%s\n", getcwd(WD,sizeof(WD)));
+        }
+        else{
+            if(strcmp(string[1], "-P") == 0){
+                char buffer[PATH_MAX];
+                char *result = realpath(getcwd(WD,sizeof(WD)) ,buffer);
+                if(result){
+                    printf("%s\n", buffer);
+                }
+            }
+            else if(strcmp(string[1], "-L") == 0){
+                printf("%s\n", getcwd(WD,sizeof(WD)));
+            }
+            else{
+                printf("Invalid command!!!\n");
+            }
+        }
+    }
     else if(strcmp(string[0], "ls") == 0){}
     else if(strcmp(string[0], "cat") == 0){}
     else if(strcmp(string[0], "date") == 0){}
