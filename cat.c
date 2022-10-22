@@ -8,10 +8,29 @@
 int main(int argc, char *argv[]){
     if(strcmp(argv[1], "-E") == 0){
 
+        for(int i = 2; i < argc -1; i++){
+            FILE* ptr;
+            ptr = fopen(argv[i], "r");
+            if(ptr != NULL){
+                char ch;
+                do {
+                ch = fgetc(ptr);
+                if(ch == '\n'){
+                    printf("$");
+                }
+                printf("%c", ch);
+                } while (ch != EOF);
+                printf("\n");
+                fclose(ptr);
+            }
+            else{
+                printf("cat: %s : No such file or directory\n", argv[i]);
+            }
+        }
     }
     else if(strcmp(argv[1], "-n") == 0){
         int counter = 1;
-        for(int i = 1; i < argc -1; i++){
+        for(int i = 2; i < argc -1; i++){
             FILE* ptr;
             ptr = fopen(argv[i], "r");
             if(ptr != NULL){
@@ -24,6 +43,7 @@ int main(int argc, char *argv[]){
                     printf("%d ", counter++);
                 }
                 } while (ch != EOF);
+                printf("\n");
                 fclose(ptr);
             }
             else{
