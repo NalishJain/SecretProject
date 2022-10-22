@@ -12,18 +12,13 @@ int main(int argc, char *argv[]){
             FILE* ptr;
             ptr = fopen(argv[i], "r");
             if(ptr != NULL){
-                char ch;
-                do {
-                ch = fgetc(ptr);
-                if (ch != '\n'){
-                    printf("%c", ch);
+                char ch[1000];
+                while(fgets(ch, 1000, stdin) !=  NULL){
+                    for(int i1 = 0; ch[i1] != '\n'; i1++){
+                        printf("%c", ch[i1]);
+                    }
+                    printf("$\n");
                 }
-                else{
-                    printf("$%c", ch);
-                }
-
-                } while (ch != EOF);
-                printf("\n");
                 fclose(ptr);
             }
             else{
