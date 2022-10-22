@@ -90,7 +90,7 @@ int main(){
         else if(rc == 0){
             printf("Inside else if\n");
             char *myargs[i+1];
-            myargs[0] = strdup("./cat")
+            myargs[0] = strdup("./cat");
             for(int j1 = 1; j1 < i; j1++ ){
                 myargs[j1] = strdup(string[j1]);
             }
