@@ -15,10 +15,13 @@ int main(int argc, char *argv[]){
                 char ch;
                 do {
                 ch = fgetc(ptr);
-                if(ch == '\n'){
-                    printf("$");
+                if (ch != '\n'){
+                    printf("%c", ch);
                 }
-                printf("%c", ch);
+                else{
+                    printf("$%c", ch);
+                }
+
                 } while (ch != EOF);
                 printf("\n");
                 fclose(ptr);
