@@ -81,7 +81,27 @@ int main(){
             }
         }
     }
-    else if(strcmp(string[0], "ls") == 0){}
+    else if(strcmp(string[0], "ls") == 0){
+        printf("Inside ls fork\n");
+        int rc = fork();
+        if(rc < 0){
+            fprintf(stderr, "fork failed\n");
+            exit(1);
+        }
+        else if(rc == 0){
+            printf("Inside else if\n");
+            char *myargs[i+1];
+            myargs[0] = strdup("./ls");
+            for(int j1 = 1; j1 < i; j1++ ){
+                myargs[j1] = strdup(string[j1]);
+            }
+            myargs[i] = NULL;
+            execvp(myargs[0], myargs);
+        }
+        else{
+            int rc_wait = wait(NULL);
+        }       
+    }
     else if(strcmp(string[0], "cat") == 0){
         printf("Inside cat fork\n");
         int rc = fork();
