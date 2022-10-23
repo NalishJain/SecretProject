@@ -16,7 +16,7 @@ int main(int argc, char *argv[]){
 
     }
     else{
-        for(int i = 0; i < argc - 1; i++){
+        for(int i = 1; i < argc - 1; i++){
                 DIR* dir = opendir(argv[i]);
                 if(dir){
                     printf("mkdir : cannot create directory %s , directory already exists\n", argv[i]);
