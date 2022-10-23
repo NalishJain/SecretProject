@@ -8,7 +8,6 @@
 #include<sys/wait.h>
 #include <dirent.h>
 #include<time.h>
-#include<conio.h>
 
 int main(int argc, char *argv[]){
     printf("%d\n", argc);
@@ -20,8 +19,8 @@ int main(int argc, char *argv[]){
             T = time(NULL);
             gtime = gmtime(&T);
 
-            char[7] dayArray = {"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
-            char[12] monArray = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+            char dayArray[7] = {"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
+            char monArray[12] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
 
             printf("%s %s %d %d:%d:%d UTC %d\n", dayArray[gtime->tm_wday], monArray[gtime->tm_mon], gtime->tm_mday, gtime->tm_hour, gtime->tm_min, gtime->tm_sec, gtime->tm_year + 1900);
 
