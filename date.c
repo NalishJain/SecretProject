@@ -22,7 +22,15 @@ int main(int argc, char *argv[]){
             char dayArray[7][4] = {"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
             char monArray[12][4] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
 
-            printf("%s %s %d %d:%d:%d UTC %d\n", dayArray[gtime->tm_wday][4], monArray[gtime->tm_mon][4], gtime->tm_mday, gtime->tm_hour, gtime->tm_min, gtime->tm_sec, gtime->tm_year + 1900);
+            for(int k = 0; k < 3; k++){
+                printf("%c", dayArray[gtime->tm_wday][k]);
+            }
+            printf(" ");
+            for(int k = 0; k < 3; k++){
+                printf("%c", monArray[gtime->tm_mon][k]);
+            }
+            printf(" ");
+            printf("%d %d:%d:%d UTC %d\n", gtime->tm_mday, gtime->tm_hour, gtime->tm_min, gtime->tm_sec, gtime->tm_year + 1900);
 
 
         }
@@ -34,7 +42,7 @@ int main(int argc, char *argv[]){
     }
 
     else if(strcmp(argv[1], "-r") == 0){
-        if(argc == 3){
+        if(argc == 4){
                 DIR* dir = opendir(argv[2]);
                 if(dir){
                     struct stat attr;
