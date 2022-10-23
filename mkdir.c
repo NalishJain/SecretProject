@@ -31,7 +31,7 @@ int main(int argc, char *argv[]){
             char copy[strlen(argv[i]) + 1];
             for(int j = 0; argv[i][j] != '\0'; j++){
                 copy[j] = argv[i][j];
-                if(argv[i][j] == '\\'){
+                if(argv[i][j] == '/'){
                     copy[j+1] = '\0';
                     DIR* dir = opendir(copy);
                     if(dir){
@@ -43,8 +43,18 @@ int main(int argc, char *argv[]){
                         }
                     }
                 }
-
             }
+            DIR* dir = opendir(argv[i]);
+            if(dir){
+                    printf("mkdir : cannot create directory %s , directory already exists\n", argv[i]);
+            }
+            else{
+                int r = mkdir(argv[i], 0755);
+                if(r != 0){
+                        printf("Cannot create directory %s \n", argv[i]);
+                    }
+            }
+
         }
         
     }
