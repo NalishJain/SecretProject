@@ -6,6 +6,7 @@
 #include<sys/types.h>
 #include<sys/stat.h>
 #include<sys/wait.h>
+#include <dirent.h>
 
 int checkDirectory(const char* dName){
     struct stat p;
@@ -19,7 +20,14 @@ int main(int argc, char *argv[]){
         for(int i = 2; i < argc - 1; i++){
             int checker  = checkDirectory(argv[i]);
             if(checker == 0){
-                printf("rm : cannot remove %s ,is a directory\n");
+                DIR* dir = opendir(argv[i]);
+                if(dir){
+                    printf("rm : cannot remove %s ,is a directory\n");
+                    closedir(dir);
+                }
+                else{
+                    printf("rm : cannot remove %s , no such file or directory\n");
+                }
             }
             else{
                 FILE *fptr = fopen(argv[i], "r");
@@ -44,7 +52,13 @@ int main(int argc, char *argv[]){
         for(int i = 2; i < argc - 1; i++){
             int checker  = checkDirectory(argv[i]);
             if(checker == 0){
-                rmdir(argv[i]);
+                DIR* dir = opendir(argv[i]);
+                if(dir){
+                    rmdir(argv[i]);
+                }
+                else{
+                    printf("rm : cannot remove %s , no such file or directory\n");
+                }
             }
             else{
                 FILE *fptr = fopen(argv[i], "r");
@@ -61,10 +75,18 @@ int main(int argc, char *argv[]){
     }
     else{
         for(int i = 1; i < argc -1; i++){
+            FILE *fptr = fopen(argv[i], "r");
             int checker  = checkDirectory(argv[i]);
 
             if(checker == 0){
-                printf("rm : cannot remove %s ,is a directory\n");
+                DIR* dir = opendir(argv[i]);
+                if(dir){
+                    printf("rm : cannot remove %s ,is a directory\n");
+                    closedir(dir);
+                }
+                else{
+                    printf("rm : cannot remove %s , no such file or directory\n");
+                }
             }
             else{
                 FILE *fptr = fopen(argv[i], "r");
