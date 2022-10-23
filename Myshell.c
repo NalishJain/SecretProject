@@ -3,8 +3,9 @@
 #include<unistd.h>
 #include<string.h>
 #include<limits.h>
+#include<sys/types.h>
+#include<sys/stat.h>
 #include<sys/wait.h>
-
 int main(){
     char str[1000];
     char *s1;
@@ -102,6 +103,28 @@ int main(){
         }
     }
     else if(strcmp(string[0], "date") == 0){}
-    else if(strcmp(string[0], "rm") == 0){}
+    else if(strcmp(string[0], "rm") == 0){
+        printf("Inside rm fork\n");
+        int rc = fork();
+        if(rc < 0){
+            fprintf(stderr, "fork failed\n");
+            exit(1);
+        }
+        else if(rc == 0){
+            printf("Inside rm else if\n");
+            char *myargs[i+1];
+            myargs[0] = strdup("./rm");
+
+            for(int j1 = 1; j1 < i; j1++ ){
+                myargs[j1] = strdup(string[j1]);
+            }
+
+            myargs[i] = NULL;
+            execvp(myargs[0], myargs);
+        }
+        else{
+            int rc_wait = wait(NULL);
+        }
+    }
     else if(strcmp(string[0], "mkdir") == 0){}
 }
