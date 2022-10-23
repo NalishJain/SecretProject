@@ -22,20 +22,20 @@ int main(int argc, char *argv[]){
             if(checker == 0){
                 DIR* dir = opendir(argv[i]);
                 if(dir){
-                    printf("rm : cannot remove %s ,is a directory\n");
+                    printf("rm : cannot remove %s ,is a directory\n", argv[i]);
                     closedir(dir);
                 }
                 else{
-                    printf("rm : cannot remove %s , no such file or directory\n");
+                    printf("rm : cannot remove %s , no such file or directory\n", argv[i]);
                 }
             }
             else{
                 FILE *fptr = fopen(argv[i], "r");
                 if(fptr == NULL){
-                    printf("rm : cannot remove %s , no such file or directory\n");
+                    printf("rm : cannot remove %s , no such file or directory\n", argv[i]);
                 }
                 else{
-                    printf("rm: remove regular file %s ?(y/n)");
+                    printf("rm: remove regular file %s ?(y/n)",, argv[i]);
                     char answer;
                     scanf("%c", &answer);
                     if(answer == 'y'){
@@ -57,13 +57,13 @@ int main(int argc, char *argv[]){
                     rmdir(argv[i]);
                 }
                 else{
-                    printf("rm : cannot remove %s , no such file or directory\n");
+                    printf("rm : cannot remove %s , no such file or directory\n", argv[i]);
                 }
             }
             else{
                 FILE *fptr = fopen(argv[i], "r");
                 if(fptr == NULL){
-                    printf("rm : cannot remove %s , no such file or directory\n");
+                    printf("rm : cannot remove %s , no such file or directory\n", argv[i]);
                 }
                 else{
                     remove(argv[i]);
@@ -81,17 +81,17 @@ int main(int argc, char *argv[]){
             if(checker == 0){
                 DIR* dir = opendir(argv[i]);
                 if(dir){
-                    printf("rm : cannot remove %s ,is a directory\n");
+                    printf("rm : cannot remove %s ,is a directory\n", argv[i]);
                     closedir(dir);
                 }
                 else{
-                    printf("rm : cannot remove %s , no such file or directory\n");
+                    printf("rm : cannot remove %s , no such file or directory\n", argv[i]);
                 }
             }
             else{
                 FILE *fptr = fopen(argv[i], "r");
                 if(fptr == NULL){
-                    printf("rm : cannot remove %s , no such file or directory\n");
+                    printf("rm : cannot remove %s , no such file or directory\n", argv[i]);
                 }
                 else{
                     remove(argv[i]);
