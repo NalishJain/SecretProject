@@ -62,6 +62,10 @@ int main(int argc, char *argv[]){
         }
         }
     }
+
+    else if(argv[1][0] == '-'){
+        printf("Invalid commad\n");
+    }
     else{
         
         for(int i = 1; i < argc; i++){
