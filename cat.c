@@ -14,11 +14,17 @@ int main(int argc, char *argv[]){
             FILE* ptr;
             ptr = fopen(argv[i], "r");
             char l[1000];
+            char l1[1000];
             if(ptr != NULL){
                 while(fgets(l, sizeof(l), ptr)){
-                    // int i = 0;
-                    // while(l[i] != '\n')
-                    printf("%s", line);
+                    int i = 0;
+                    while(l[i] != '\n'){
+                        l1[i] = l[i];
+                        i++;
+                    }
+
+                    strcat(l1, "$\n\0");
+                    printf("%s", l1);
                 }
 
             }
