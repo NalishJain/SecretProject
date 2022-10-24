@@ -12,7 +12,7 @@ int main(int argc, char *argv[]){
     
     if(strcmp(argv[1], "-v") == 0){
         for(int i = 2; i < argc; i++){
-                if(argv[i]){
+                if(argv[i] != " "){
                 DIR* dir = opendir(argv[i]);
                 if(dir){
                     printf("mkdir : cannot create directory %s , directory already exists\n", argv[i]);
@@ -31,7 +31,7 @@ int main(int argc, char *argv[]){
     }
     else if(strcmp(argv[1], "-p") == 0){
         for(int i = 2; i < argc; i++){
-            if(argv[i]){
+            if(argv[i] != " "){
             char copy[strlen(argv[i]) + 1];
             for(int j = 0; argv[i][j] != '\0'; j++){
                 copy[j] = argv[i][j];
@@ -68,7 +68,7 @@ int main(int argc, char *argv[]){
     }
     else{
         for(int i = 1; i < argc; i++){
-            if(argv[i]){
+            if(argv[i] != " "){
                 DIR* dir = opendir(argv[i]);
                 if(dir){
                     printf("mkdir : cannot create directory %s , directory already exists\n", argv[i]);
