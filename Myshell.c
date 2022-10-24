@@ -73,8 +73,9 @@ int main(){
         char curpath[1000];
         char WD[1000];
         int k;
+        printf("%d\n", i);
         if(i == 2){
-            chdir("root");
+            k = chdir("root");
         }
         else if(strcmp(string[1], "-P")){
             char WD[1000];
@@ -89,15 +90,29 @@ int main(){
                strcat(buffer, string[2]); 
             }
 
-            chdir(buffer);
+            k = chdir(buffer);
+
+            if(k == -1){
+                printf("cd : no such file or directory exists \n");
+            }
 
 
         }
         else if(strcmp(string[1], "-L")){
-            chdir(string[2]);
+           k =  chdir(string[2]);
+            if(k == -1){
+                printf("cd : no such file or directory exists \n");
+            }
+
+        }
+        else if(i > 4){
+            printf("Invalid command \n");
         }
         else{
-            printf("Invalid Command\n");
+           k = chdir(string[1]);
+            if(k == -1){
+                printf("cd : no such file or directory exists \n");
+            }
         }
 
     }
