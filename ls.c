@@ -11,7 +11,7 @@
 #include <stdlib.h>
 
 int main(int argc, const char *argv[]){
-    if((argc == 2 && argv[1] == NULL) || argc == 1){
+    if(argc == 2){
        struct dirent *e1;
        DIR *directory = opendir(".");
        while((e1 = readdir(directory)) != NULL){
@@ -22,7 +22,7 @@ int main(int argc, const char *argv[]){
        } 
        printf("\n");
     }
-    else if((argc == 3 && argv[2] == NULL) || argc == 2){
+    else if(argc == 3){
 
         if(strcmp(argv[1], "-1") == 0){
             struct dirent *e1;
