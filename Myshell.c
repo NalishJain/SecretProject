@@ -201,10 +201,10 @@ int main(){
             // printf("Inside date else if\n");
             char *myargs[i+1];
             myargs[0] = strdup("/root/SecretProject/date");
-            for(int j1 = 1; j1 < i; j1++ ){
+            for(int j1 = 1; j1 < i - 1; j1++ ){
                 myargs[j1] = strdup(string[j1]);
             }
-            myargs[i] = NULL;
+            myargs[i - 1] = NULL;
             execvp(myargs[0], myargs);
         }
         else{
@@ -223,11 +223,11 @@ int main(){
             char *myargs[i+1];
             myargs[0] = strdup("/root/SecretProject/rm");
 
-            for(int j1 = 1; j1 < i; j1++ ){
+            for(int j1 = 1; j1 < i - 1; j1++ ){
                 myargs[j1] = strdup(string[j1]);
             }
 
-            myargs[i] = NULL;
+            myargs[i -1] = NULL;
             execvp(myargs[0], myargs);
         }
         else{
@@ -247,10 +247,10 @@ int main(){
             // printf("Inside else if mkdir \n");
             char *myargs[i+1];
             myargs[0] = strdup("/root/SecretProject/mkdir");
-            for(int j1 = 1; j1 < i; j1++ ){
+            for(int j1 = 1; j1 < i - 1; j1++ ){
                 myargs[j1] = strdup(string[j1]);
             }
-            myargs[i] = NULL;
+            myargs[i - 1] = NULL;
             execvp(myargs[0], myargs);
         }
         else{
