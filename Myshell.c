@@ -5,7 +5,7 @@
 #include<limits.h>
 #include<sys/types.h>
 #include<sys/stat.h>
-// #include<sys/wait.h>
+#include<sys/wait.h>
 #include<pthread.h>
 
 //pid null system absolutepath string copy 
@@ -124,7 +124,7 @@ int main(){
         else if(rc == 0){
             printf("Inside else if\n");
             char *myargs[i+1];
-            myargs[0] = strdup("./ls");
+            myargs[0] = strdup("./SecretProject/ls");
             for(int j1 = 1; j1 < i; j1++ ){
                 myargs[j1] = strdup(string[j1]);
             }
@@ -145,7 +145,7 @@ int main(){
         else if(rc == 0){
             printf("Inside else if\n");
             char *myargs[i+1];
-            myargs[0] = strdup("./cat");
+            myargs[0] = strdup("./SecretProject/cat");
             for(int j1 = 1; j1 < i; j1++ ){
                 myargs[j1] = strdup(string[j1]);
             }
@@ -166,7 +166,7 @@ int main(){
         else if(rc == 0){
             printf("Inside date else if\n");
             char *myargs[i+1];
-            myargs[0] = strdup("./date");
+            myargs[0] = strdup("./SecretProject/date");
             for(int j1 = 1; j1 < i; j1++ ){
                 myargs[j1] = strdup(string[j1]);
             }
@@ -187,7 +187,7 @@ int main(){
         else if(rc == 0){
             printf("Inside rm else if\n");
             char *myargs[i+1];
-            myargs[0] = strdup("./rm");
+            myargs[0] = strdup("./SecretProject/rm");
 
             for(int j1 = 1; j1 < i; j1++ ){
                 myargs[j1] = strdup(string[j1]);
@@ -212,7 +212,7 @@ int main(){
         else if(rc == 0){
             printf("Inside else if mkdir \n");
             char *myargs[i+1];
-            myargs[0] = strdup("./mkdir");
+            myargs[0] = strdup("./SecretProject/mkdir");
             for(int j1 = 1; j1 < i; j1++ ){
                 myargs[j1] = strdup(string[j1]);
             }
@@ -226,14 +226,14 @@ int main(){
     else if(strcmp(string[0], "&tmkdir") == 0){
         pthread_t pid;
         char command[10000];
-        strcpy(command, "./mkdir");
+        strcpy(command, "./SecretProject/mkdir");
         for(int j1 = 1; j1 < i; j1++ ){
             strcat(command , " ");
             strcat(command, string[j1]);
         }
         // const char *command1 = command.c_str();
         
-        pthread_create(&pid, NULL, &system, command);
+        pthread_create(&pid, NULL, (void*)&system, command);
         pthread_join(pid, NULL);
     }
     else if(strcmp(string[0], "&trm") == 0){
