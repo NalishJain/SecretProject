@@ -3,6 +3,8 @@
 #include<unistd.h>
 #include<string.h>
 #include<limits.h>
+#include<sys/types.h>
+#include<sys/stat.h>
 #include<sys/wait.h>
 
 int main(int argc, char *argv[]){
@@ -11,31 +13,13 @@ int main(int argc, char *argv[]){
         for(int i = 2; i < argc -1; i++){
             FILE* ptr;
             ptr = fopen(argv[i], "r");
+            char l[1000];
             if(ptr != NULL){
-                FILE *fileP; 
-                fileP = fopen("o.txt", "w");
-                char ch;
-                do {
-                ch = fgetc(ptr);
-            
-                if(ch == '\n'){
-                    fputc('$', fileP);
-                    fputc('\n', fileP);
+                while(fgets(l, sizeof(l), ptr)){
+                    // int i = 0;
+                    // while(l[i] != '\n')
+                    printf("%s", line);
                 }
-                else{
-                    fputc(ch, fileP) ;
-                }
-
-                } while (ch != EOF);
-                fclose(fileP);
-                fclose(ptr);
-
-                ptr = fopen("o.txt", "r");
-                do {
-                ch = fgetc(ptr);
-                printf("%c", ch);
-                } while (ch != EOF);
-                fclose(ptr);
 
             }
             else{
