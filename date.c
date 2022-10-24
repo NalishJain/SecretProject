@@ -10,16 +10,16 @@
 #include<time.h>
 
 int main(int argc, char *argv[]){
-    printf("%d\n", argc);
+    // printf("%d\n", argc);
     if(strcmp(argv[1], "-u") == 0){
-        if(argc == 3){
+        if((argc == 3 && argv[2] == NULL) || argc == 2){
             struct tm *gtime;
             time_t T;
 
             T = time(NULL);
             gtime = gmtime(&T);
 
-            char dayArray[7][4] = {"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
+            char dayArray[7][4] = {"Sun","Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
             char monArray[12][4] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
 
             for(int k = 0; k < 3; k++){
@@ -42,19 +42,19 @@ int main(int argc, char *argv[]){
     }
 
     else if(strcmp(argv[1], "-r") == 0){
-        if(argc == 4){
+        if((argc == 4 && argv[3] == NULL) || argc == 3){
                 DIR* dir = opendir(argv[2]);
                 if(dir){
-                    struct stat attr;
-                    stat(argv[2], &attr);
-                    printf("%s\n", ctime(&attr.st_mtime));
+                    struct stat tr;
+                    stat(argv[2], &tr);
+                    printf("%s\n", ctime(&tr.st_mtime));
                 }
                 else{
                     FILE* fptr = fopen(argv[2], "r");
                     if(fptr){
-                        struct stat attr;
-                        stat(argv[2], &attr);
-                        printf("%s\n", ctime(&attr.st_mtime));
+                        struct stat tr;
+                        stat(argv[2], &tr);
+                        printf("%s\n", ctime(&tr.st_mtime));
                     }
                     else{
                         printf("date : no such file or directory exists \n");
@@ -67,7 +67,7 @@ int main(int argc, char *argv[]){
     }
 
     else{
-        if(argc == 2){
+        if((argc == 2 && argv[1] == NULL) || argc == 1){
         time_t T;
         time(&T);
         printf("%s\n", ctime(&T));
