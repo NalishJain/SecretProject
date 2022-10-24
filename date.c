@@ -11,6 +11,7 @@
 
 int main(int argc, char *argv[]){
     // printf("%d\n", argc);
+    if(argc != 1){
     if(strcmp(argv[1], "-u") == 0){
         if(argc == 2){
             struct tm *gtime;
@@ -67,15 +68,17 @@ int main(int argc, char *argv[]){
     }
 
     else{
-        if(argc == 1){
+        printf("Invalid command \n");
+    }
+
+    }
+
+    else{
+
         time_t T;
         time(&T);
         printf("%s\n", ctime(&T));
-        }
-
-        else{
-            printf("Invalid command \n");
-        }
+        
 
         
     }
