@@ -13,18 +13,14 @@ int main(int argc, char *argv[]){
         for(int i = 2; i < argc -1; i++){
             FILE* ptr;
             ptr = fopen(argv[i], "r");
-            char l[1000];
-            char l1[1000];
+            char *l;
+            size_t size = 1000;
+            size_t c;
+            l = (char*)malloc(size*sizeof(char));
             if(ptr != NULL){
-                while(fgets(l, sizeof(l), ptr)){
-                    int i = 0;
-                    while(l[i] != '\n'){
-                        l1[i] = l[i];
-                        i++;
-                    }
-
-                    strcat(l1, "$\n\0");
-                    printf("%s", l1);
+                while(getline(&l, &size, ptr) != -1){
+                    //printf("%s $ \n", l);
+                    printf("%s\n", l);
                 }
 
             }
