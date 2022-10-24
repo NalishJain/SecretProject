@@ -34,10 +34,6 @@ int main(int argc, char *argv[]){
             printf("%d %d:%d:%d UTC %d\n", gtime->tm_mday, gtime->tm_hour, gtime->tm_min, gtime->tm_sec, gtime->tm_year + 1900);
 
         }
-                
-        if{
-            printf("Invalid command0 \n");
-        }
 
     }
     if(argc == 4 || argc == 3){
@@ -66,9 +62,21 @@ int main(int argc, char *argv[]){
     }
 
     if(argc == 2 || argc == 1){
+        if(argc == 1){
         time_t T;
         time(&T);
-        printf("%s\n", ctime(&T));        
+        printf("%s\n", ctime(&T));}
+
+        if(argc == 2){
+          if(strcmp(argv[1], "-u") == 0){
+
+          } 
+          else{
+            time_t T;
+            time(&T);
+            printf("%s\n", ctime(&T)); 
+          } 
+        }        
     }
     
 
