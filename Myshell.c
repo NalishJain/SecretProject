@@ -5,7 +5,8 @@
 #include<limits.h>
 #include<sys/types.h>
 #include<sys/stat.h>
-#include<sys/wait.h>
+// #include<sys/wait.h>
+#include<pthread.h>
 
 //pid null system absolutepath string copy 
 
@@ -221,6 +222,28 @@ int main(){
         else{
             int rc_wait = wait(NULL);
         }
+    }
+    else if(strcmp(string[0], "&tmkdir") == 0){
+        pthread_t pid;
+        char command[10000];
+        strcpy(command, "./mkdir");
+        for(int j1 = 1; j1 < i; j1++ ){
+            strcat(command , " ");
+            strcat(command, string[j1]);
+        }
+        // const char *command1 = command.c_str();
+        
+        pthread_create(&pid, NULL, &system, command);
+        pthread_join(pid, NULL);
+    }
+    else if(strcmp(string[0], "&trm") == 0){
+
+    }
+    else if(strcmp(string[0], "&tdate") == 0){}
+    else if(strcmp(string[0], "&tcat") == 0){}
+    else if(strcmp(string[0], "&tls") == 0){}
+    else{
+        printf( "Invalid command\n");
     }
 
 }
