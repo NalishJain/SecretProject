@@ -130,7 +130,7 @@ int main(){
         else if(rc == 0){
             printf("Inside else if\n");
             char *myargs[i+1];
-            myargs[0] = strdup("./ls");
+            myargs[0] = strdup("/root/SecretProject/ls");
             for(int j1 = 1; j1 < i; j1++ ){
                 myargs[j1] = strdup(string[j1]);
             }
@@ -151,7 +151,7 @@ int main(){
         else if(rc == 0){
             printf("Inside else if\n");
             char *myargs[i+1];
-            myargs[0] = strdup("./cat");
+            myargs[0] = strdup("/root/SecretProject/cat");
             for(int j1 = 1; j1 < i; j1++ ){
                 myargs[j1] = strdup(string[j1]);
             }
@@ -172,7 +172,7 @@ int main(){
         else if(rc == 0){
             printf("Inside date else if\n");
             char *myargs[i+1];
-            myargs[0] = strdup("./date");
+            myargs[0] = strdup("/root/SecretProject/date");
             for(int j1 = 1; j1 < i; j1++ ){
                 myargs[j1] = strdup(string[j1]);
             }
@@ -193,7 +193,7 @@ int main(){
         else if(rc == 0){
             printf("Inside rm else if\n");
             char *myargs[i+1];
-            myargs[0] = strdup("./rm");
+            myargs[0] = strdup("/root/SecretProject/rm");
 
             for(int j1 = 1; j1 < i; j1++ ){
                 myargs[j1] = strdup(string[j1]);
@@ -218,7 +218,7 @@ int main(){
         else if(rc == 0){
             printf("Inside else if mkdir \n");
             char *myargs[i+1];
-            myargs[0] = strdup("./mkdir");
+            myargs[0] = strdup("/root/SecretProject/mkdir");
             for(int j1 = 1; j1 < i; j1++ ){
                 myargs[j1] = strdup(string[j1]);
             }
@@ -232,7 +232,7 @@ int main(){
     else if(strcmp(string[0], "&tmkdir") == 0){
         pthread_t pid;
         char command[10000];
-        strcpy(command, "./mkdir");
+        strcpy(command, "/root/SecretProject/mkdir");
         for(int j1 = 1; j1 < i; j1++ ){
             strcat(command , " ");
             strcat(command, string[j1]);
@@ -245,7 +245,7 @@ int main(){
     else if(strcmp(string[0], "&trm") == 0){
         pthread_t pid;
         char command[10000];
-        strcpy(command, "./rm");
+        strcpy(command, "/root/SecretProject/rm");
         for(int j1 = 1; j1 < i; j1++ ){
             strcat(command , " ");
             strcat(command, string[j1]);
@@ -256,7 +256,7 @@ int main(){
     else if(strcmp(string[0], "&tdate") == 0){
         pthread_t pid;
         char command[10000];
-        strcpy(command, "./date");
+        strcpy(command, "/root/SecretProject/date");
         for(int j1 = 1; j1 < i; j1++ ){
             strcat(command , " ");
             strcat(command, string[j1]);
@@ -267,7 +267,7 @@ int main(){
     else if(strcmp(string[0], "&tcat") == 0){
         pthread_t pid;
         char command[10000];
-        strcpy(command, "./cat");
+        strcpy(command, "/root/SecretProject/cat");
         for(int j1 = 1; j1 < i; j1++ ){
             strcat(command , " ");
             strcat(command, string[j1]);
@@ -278,7 +278,7 @@ int main(){
     else if(strcmp(string[0], "&tls") == 0){
         pthread_t pid;
         char command[10000];
-        strcpy(command, "./ls");
+        strcpy(command, "/root/SecretProject/ls");
         for(int j1 = 1; j1 < i; j1++ ){
             strcat(command , " ");
             strcat(command, string[j1]);
