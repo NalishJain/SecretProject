@@ -18,6 +18,8 @@ void* fcaller(void *f){
     pthread_exit(NULL);
 }
 int main(){
+
+    while(1){
     char str[1000];
     char *s1;
     fgets(str, 1000, stdin);
@@ -70,38 +72,43 @@ int main(){
     else if(strcmp(string[0], "cd") == 0){  
         char curpath[1000];
         char WD[1000];
-        if(i == 1){
+        int k;
+        if(i == 2){
             chdir("root");
         }
         else if(strcmp(string[1], "-P")){
-            if(string[2][0] == '/'){chdir(string[2]);
+            char WD[1000];
+            char buffer[PATH_MAX];
+            char *result = realpath(getcwd(WD,sizeof(WD)) ,buffer);
+
+            if(string[2][0] != '/'){
+            strcat(buffer,"/");
+            strcat(buffer, string[2]);
             }
             else{
-                if(getcwd(WD,sizeof(WD))[-1] != '/'){
-                    strcpy(curpath, getcwd(WD,sizeof(WD)));
-                    strcat(curpath, "/");
-                    strcat(curpath, string[2]);
-                }
-                else{
-                    strcpy(curpath, getcwd(WD,sizeof(WD)));
-                    strcat(curpath, string[2]);
-                }
-
+               strcat(buffer, string[2]); 
             }
+
+            chdir(buffer);
+
+
         }
-        else if(i == 2){
-            if(string[2][0] == '/'){chdir(string[2]);}
+        else if(strcmp(string[1], "-L")){
+            chdir(string[2]);
+        }
+        else{
+            printf("Invalid Command\n");
         }
 
     }
     else if(strcmp(string[0], "pwd") == 0){
         char WD[1000];
 
-        if(i == 1){
+        if(i == 2){
             printf("%s\n", getcwd(WD,sizeof(WD)));
         }
         else{
-            if(i == 2){
+            if(i == 3){
             if(strcmp(string[1], "-P") == 0){
                 char buffer[PATH_MAX];
                 char *result = realpath(getcwd(WD,sizeof(WD)) ,buffer);
@@ -114,7 +121,8 @@ int main(){
             }
             else{
                 printf("Invalid command!!!\n");
-            }}
+            }
+            }
             else{
                 printf("Invalid command\n");
             }
@@ -289,5 +297,5 @@ int main(){
     else{
         printf( "Invalid command\n");
     }
-
+    }
 }
