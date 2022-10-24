@@ -23,7 +23,7 @@ int main(int argc, const char *argv[]){
        printf("\n");     
     }
 
-    if(argc == 2){
+    else if(argc == 2){
         if(strcmp(argv[1], "-1") == 0){
             struct dirent *e1;
             DIR *directory = opendir(".");
@@ -45,7 +45,7 @@ int main(int argc, const char *argv[]){
             printf("\n");            
         }
 
-        else if(argv[1]){
+        else if(argv[1] == NULL){
             printf("Invalid command \n");
         }      
         else{
@@ -93,3 +93,4 @@ int main(int argc, const char *argv[]){
         printf("Invalid command\n");
     }
 }
+
