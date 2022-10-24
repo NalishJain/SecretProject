@@ -11,7 +11,7 @@ int main(int argc, char *argv[]){
     if(strcmp(argv[1], "-E") == 0){
 
         for(int i = 2; i < argc; i++){
-            if(argv[i]){
+            if(strlen(argv[i]) != 1){
             FILE* ptr;
             ptr = fopen(argv[i], "r");
             char *l;
@@ -40,7 +40,7 @@ int main(int argc, char *argv[]){
     else if(strcmp(argv[1], "-n") == 0){
         int counter = 1;
         for(int i = 2; i < argc; i++){
-            if(argv[i]){
+            if(strlen(argv[i]) != 1){
             FILE* ptr;
             ptr = fopen(argv[i], "r");
             if(ptr != NULL){
@@ -69,7 +69,7 @@ int main(int argc, char *argv[]){
     else{
         
         for(int i = 1; i < argc; i++){
-            if(argv[i]){
+            if(strlen(argv[i]) != 1){
             FILE* ptr;
             ptr = fopen(argv[i], "r");
             if(ptr != NULL){
