@@ -78,9 +78,9 @@ int main(){
         char curpath[1000];
         char WD[1000];
         int k;
-        printf("%d\n", i);
+        // printf("%d\n", i);
         if(i == 2){
-            k = chdir("root");
+            k = chdir("/root");
         }
         else if(strcmp(string[1], "-P") == 0){
             char WD[1000];
