@@ -11,9 +11,8 @@
 
 int main(int argc, char *argv[]){
     // printf("%d\n", argc);
-    if(argc == 3 || argc == 2){
-        if(strcmp(argv[1], "-u") == 0){
-        
+    if(strcmp(argv[1], "-u") == 0){
+        if(argc == 2){
             struct tm *gtime;
             time_t T;
 
@@ -33,13 +32,17 @@ int main(int argc, char *argv[]){
             printf(" ");
             printf("%d %d:%d:%d UTC %d\n", gtime->tm_mday, gtime->tm_hour, gtime->tm_min, gtime->tm_sec, gtime->tm_year + 1900);
 
+
+        }
+        
+        else{
+            printf("Invalid command \n");
         }
 
     }
-    if(argc == 4 || argc == 3){
 
-        if(strcmp(argv[1], "-r") == 0){
-    
+    else if(strcmp(argv[1], "-r") == 0){
+        if(argc == 3){
                 DIR* dir = opendir(argv[2]);
                 if(dir){
                     struct stat tr;
@@ -58,25 +61,23 @@ int main(int argc, char *argv[]){
                     }
                 }     
         }
-
+        else{
+            printf("Invalid command \n");
+        }
     }
 
-    if(argc == 2 || argc == 1){
+    else{
         if(argc == 1){
         time_t T;
         time(&T);
-        printf("%s\n", ctime(&T));}
+        printf("%s\n", ctime(&T));
+        }
 
-        if(argc == 2){
-          if(strcmp(argv[1], "-u") == 0){
+        else{
+            printf("Invalid command \n");
+        }
 
-          } 
-          else{
-            time_t T;
-            time(&T);
-            printf("%s\n", ctime(&T)); 
-          } 
-        }        
+        
     }
     
 
