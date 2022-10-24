@@ -45,11 +45,10 @@ int main(int argc, const char *argv[]){
             printf("\n");            
         }
 
-        else if(!argv[1]){
-            printf("Invalid command \n")
+        else if(argv[1]){
+            printf("Invalid command \n");
         }      
-    }
-    if(argc == 2){
+        else{
        struct dirent *e1;
        DIR *directory = opendir(".");
        while((e1 = readdir(directory)) != NULL){
@@ -59,7 +58,9 @@ int main(int argc, const char *argv[]){
         printf("%s ", e1->d_name);
        } 
        printf("\n");
+        }
     }
+
     else if(argc == 3){
 
         if(strcmp(argv[1], "-1") == 0){
