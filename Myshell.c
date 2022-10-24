@@ -52,6 +52,7 @@ int main(){
             }
         }
         else if(strcmp(string[1], "--help") == 0){
+            if(i == 3){
             FILE* ptr;
             char ch;
             ptr = fopen("echo.txt", "r");
@@ -59,7 +60,11 @@ int main(){
              ch = fgetc(ptr);
             printf("%c", ch);
             } while (ch != EOF);
-            fclose(ptr);
+            fclose(ptr);}
+            else{
+                printf("Invalid command\n");
+            }
+
         }
         else{
             for(int j = 1; j < i; j++){
@@ -144,14 +149,14 @@ int main(){
         }
     }
     else if(strcmp(string[0], "ls") == 0){
-        printf("Inside ls fork\n");
+        // printf("Inside ls fork\n");
         int rc = fork();
         if(rc < 0){
             fprintf(stderr, "fork failed\n");
             exit(1);
         }
         else if(rc == 0){
-            printf("Inside else if\n");
+            // printf("Inside else if\n");
             char *myargs[i+1];
             myargs[0] = strdup("/root/SecretProject/ls");
             for(int j1 = 1; j1 < i; j1++ ){
@@ -165,14 +170,14 @@ int main(){
         }       
     }
     else if(strcmp(string[0], "cat") == 0){
-        printf("Inside cat fork\n");
+        // printf("Inside cat fork\n");
         int rc = fork();
         if(rc < 0){
             fprintf(stderr, "fork failed\n");
             exit(1);
         }
         else if(rc == 0){
-            printf("Inside else if\n");
+            // printf("Inside else if\n");
             char *myargs[i+1];
             myargs[0] = strdup("/root/SecretProject/cat");
             for(int j1 = 1; j1 < i; j1++ ){
@@ -186,14 +191,14 @@ int main(){
         }
     }
     else if(strcmp(string[0], "date") == 0){
-        printf("Inside date fork\n");
+        // printf("Inside date fork\n");
         int rc = fork();
         if(rc < 0){
             fprintf(stderr, "fork failed\n");
             exit(1);
         }
         else if(rc == 0){
-            printf("Inside date else if\n");
+            // printf("Inside date else if\n");
             char *myargs[i+1];
             myargs[0] = strdup("/root/SecretProject/date");
             for(int j1 = 1; j1 < i; j1++ ){
@@ -207,14 +212,14 @@ int main(){
         }
     }
     else if(strcmp(string[0], "rm") == 0){
-        printf("Inside rm fork\n");
+        // printf("Inside rm fork\n");
         int rc = fork();
         if(rc < 0){
             fprintf(stderr, "fork failed\n");
             exit(1);
         }
         else if(rc == 0){
-            printf("Inside rm else if\n");
+            // printf("Inside rm else if\n");
             char *myargs[i+1];
             myargs[0] = strdup("/root/SecretProject/rm");
 
@@ -231,7 +236,7 @@ int main(){
     }
 
     else if(strcmp(string[0], "mkdir") == 0){
-        printf("Inside mkdir fork\n");
+        // printf("Inside mkdir fork\n");
         int rc = fork();
 
         if(rc < 0){
@@ -239,7 +244,7 @@ int main(){
             exit(1);
         }
         else if(rc == 0){
-            printf("Inside else if mkdir \n");
+            // printf("Inside else if mkdir \n");
             char *myargs[i+1];
             myargs[0] = strdup("/root/SecretProject/mkdir");
             for(int j1 = 1; j1 < i; j1++ ){
