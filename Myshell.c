@@ -82,6 +82,9 @@ int main(){
         if(i == 2){
             k = chdir("/root");
         }
+        else if(i > 4){
+            printf("Invalid command \n");
+        }
         else if(strcmp(string[1], "-P") == 0){
             char WD[1000];
             char buffer[PATH_MAX];
@@ -110,9 +113,12 @@ int main(){
             }
 
         }
-        else if(i > 4){
-            printf("Invalid command \n");
+
+        else if(string[1][0] == '-'){
+            printf("Invalid command\n";)
         }
+
+
         else{
            k = chdir(string[1]);
             if(k == -1){
