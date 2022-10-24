@@ -18,7 +18,7 @@ int checkDirectory(const char* dName){
 int main(int argc, char *argv[]){
     if(strcmp(argv[1], "-i") == 0){
         for(int i = 2; i < argc; i++){
-            if(argv[i]){
+            if(argv[i] != " "){
             int checker  = checkDirectory(argv[i]);
             if(checker == 0){
                 DIR* dir = opendir(argv[i]);
@@ -52,7 +52,7 @@ int main(int argc, char *argv[]){
     }
     else if(strcmp(argv[1], "-r") == 0){
         for(int i = 2; i < argc; i++){
-            if(argv[i]){
+            if(argv[i] != " "){
             int checker  = checkDirectory(argv[i]);
             if(checker == 0){
                 DIR* dir = opendir(argv[i]);
@@ -79,7 +79,7 @@ int main(int argc, char *argv[]){
     }
     else{
         for(int i = 1; i < argc; i++){
-            if(argv[i]){
+            if(argv[i] != " "){
             FILE *fptr = fopen(argv[i], "r");
             int checker  = checkDirectory(argv[i]);
 
