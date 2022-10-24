@@ -7,6 +7,9 @@
 #include<sys/stat.h>
 #include<sys/wait.h>
 
+//pid null system absolutepath string copy 
+
+//getlines
 int main(){
     char str[1000];
     char *s1;
@@ -57,7 +60,32 @@ int main(){
             printf("\n");
         }
     }
-    else if(strcmp(string[0], "cd") == 0){   
+    else if(strcmp(string[0], "cd") == 0){  
+        char curpath[1000];
+        char WD[1000];
+        if(i == 1){
+            chdir("root");
+        }
+        else if(strcmp(string[1], "-P")){
+            if(string[2][0] == '/'){chdir(string[2]);
+            }
+            else{
+                if(getcwd(WD,sizeof(WD))[-1] != '/'){
+                    strcpy(curpath, getcwd(WD,sizeof(WD)));
+                    strcat(curpath, "/");
+                    strcat(curpath, string[2]);
+                }
+                else{
+                    strcpy(curpath, getcwd(WD,sizeof(WD)));
+                    strcat(curpath, string[2]);
+                }
+
+            }
+        }
+        else if(i == 2){
+            if(string[2][0] == '/'){chdir(string[2]);}
+        }
+
     }
     else if(strcmp(string[0], "pwd") == 0){
         char WD[1000];
@@ -66,6 +94,7 @@ int main(){
             printf("%s\n", getcwd(WD,sizeof(WD)));
         }
         else{
+            if(i == 2){
             if(strcmp(string[1], "-P") == 0){
                 char buffer[PATH_MAX];
                 char *result = realpath(getcwd(WD,sizeof(WD)) ,buffer);
@@ -78,6 +107,9 @@ int main(){
             }
             else{
                 printf("Invalid command!!!\n");
+            }}
+            else{
+                printf("Invalid command\n");
             }
         }
     }
