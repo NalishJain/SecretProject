@@ -109,7 +109,7 @@ int main(int argc, char *argv[]){
                     while(getline(&l, &size, ptr) != -1){
                     //printf("%s $ \n", l);
                         int i1 = 0;
-                         while(l[i1] != '\n'){
+                         while(l[i1] != '\n' && l[i1] != EOF){
                             fprintf(optr,"%c", l[i1]);
                             i1++;
                         }
@@ -123,6 +123,7 @@ int main(int argc, char *argv[]){
         }
         else if(strcmp(argv[1], "-n") == 0){
             FILE* ptr;
+            int counter = 1;
             for(int i = 2; i < argc - 2; i++){
                 ptr = fopen(argv[i], "r");
             if(ptr != NULL){
@@ -130,7 +131,8 @@ int main(int argc, char *argv[]){
                 fprintf(optr ,"%d ", counter);
                 do {
                 ch = fgetc(ptr);
-                fprintf(optr,"%c", ch);
+                if(ch != EOF){
+                fprintf(optr,"%c", ch);}
                 if(ch == '\n'){
                     fprintf(optr,"%d ", counter++);
                 }
@@ -148,14 +150,15 @@ int main(int argc, char *argv[]){
         }
         else{
             FILE* ptr;
-            for(int i = 2; i < argc - 2; i++){
+            for(int i = 1; i < argc - 2; i++){
             ptr = fopen(argv[i], "r");
             if(ptr != NULL){
                 char ch;
 
                 do {
                 ch = fgetc(ptr);
-                fprintf(optr ,"%c", ch);
+                if(ch != EOF){
+                fprintf(optr ,"%c", ch);}
                 } while (ch != EOF);
                 fclose(ptr);
             }
@@ -165,6 +168,7 @@ int main(int argc, char *argv[]){
             }
 
         }
-        flcose(optr);
+        fprintf(optr, "%c", EOF);
+        fclose(optr);
     }
 }
