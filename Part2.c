@@ -11,7 +11,8 @@ int main(){
 
     system("mkdir ~/kernelbuild1");
     system("cd ~/kernelbuild1");
-    system("wget https://cdn.kernel.org/pub/linux/kernel/vA.x/linux-6.0.9.tar.xz");
+    system("wget https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.0.9.tar.xz");
+    system("unxz linux-6.0.9.tar.xz");
     system("tar -xvf linux-6.0.9.tar");
     system("chown -R $USER:$USER linux-6.0.9");
     system("cd linux-6.0.9");
