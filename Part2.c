@@ -11,13 +11,12 @@ int main(){
 
     system("mkdir ~/kernelbuild1");
     system("cd ~/kernelbuild1");
-    system("wget https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.0.9.tar.xz");
-    system("unxz linux-6.0.9.tar.xz");
-    system("tar -xvf linux-6.0.9.tar");
-    system("chown -R $USER:$USER linux-6.0.9");
-    system("cd linux-6.0.9");
-    system("make mrproper");
-    system("wget --no-check-certificate 'https://docs.google.com/uc?export=download&id=15wIy6KDTNTQ9zgok2mOErfGn8QsSvGZ3' -O .config");
+    system("wget https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.19.17.tar.xz");
+    system("unxz linux-5.19.17.tar.xz");
+    system("tar -xvf linux-5.19.17.tar");
+    system("chown -R $USER:$USER linux-5.19.17");
+
+
 
     //Process1
     struct timespec p1start, p1end;
