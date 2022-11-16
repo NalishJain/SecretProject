@@ -39,9 +39,9 @@ int main(){
     }
     else{
         int rc1_wait = wait(NULL);
-        clock_gettime(CLOCK_REALTIME, &p1end);
-        p1time = (p1end.tv_sec - p1start.tv_sec) +(p1end.tv_nsec - p1start.tv_nsec) / BILLION;
-    }
-    printf("%lf \n", p1time);
 
+    }
+    clock_gettime(CLOCK_REALTIME, &p1end);
+    p1time = (p1end.tv_sec - p1start.tv_sec) +(p1end.tv_nsec - p1start.tv_nsec) / BILLION;
+    printf("%lf \n", p1time);
 }
