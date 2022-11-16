@@ -40,10 +40,8 @@ void* p1caller(void *f){
     clock_gettime(CLOCK_REALTIME, &start);
     countA();
     clock_gettime(CLOCK_REALTIME, &end);
-    pthread_exit(NULL);
     Double *ptr = malloc(sizeof(Double));
     ptr->x = (end.tv_sec - start.tv_sec) +(end.tv_nsec - start.tv_nsec) / BILLION;
-    printf("%lf\n", ptr->x);
     return (void*)ptr;
 }
 
@@ -55,12 +53,9 @@ void* p2caller(void *f){
     struct timespec start, end;
     clock_gettime(CLOCK_REALTIME, &start);
     countB();
-    pthread_exit(NULL);
     clock_gettime(CLOCK_REALTIME, &end);
-    pthread_exit(NULL);
     Double *ptr = malloc(sizeof(Double));
     ptr->x = (end.tv_sec - start.tv_sec) +(end.tv_nsec - start.tv_nsec) / BILLION;
-        printf("%lf\n", ptr->x);
     return (void*)ptr;
 }
 
@@ -72,12 +67,10 @@ void* p3caller(void *f){
     struct timespec start, end;
     clock_gettime(CLOCK_REALTIME, &start);
     countC();
-    pthread_exit(NULL);
     clock_gettime(CLOCK_REALTIME, &end);
-    pthread_exit(NULL);
+
     Double *ptr = malloc(sizeof(Double));
     ptr->x = (end.tv_sec - start.tv_sec) +(end.tv_nsec - start.tv_nsec) / BILLION;
-        printf("%lf\n", ptr->x);
     return (void*)ptr;
 }
 
@@ -101,7 +94,7 @@ int main(){
     pthread_join(ThreadB, (void **)&r2);
     pthread_join(ThreadC, (void **)&r3);
 
-    // printf("%lf %lf %lf",r1->x,r2->x,r3->x);
+    printf("%lf %lf %lf",r1->x,r2->x,r3->x);
 
 
 
