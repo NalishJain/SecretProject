@@ -9,10 +9,9 @@
 
 int main(){
 
-    system("mkdir ~/kernelbuild1 && cd /D ~/kernelbuild1 && wget -P ~/kernelbuild1/ https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.19.17.tar.xz && unxz linux-5.19.17.tar.xz && tar -xvf linux-5.19.17.tar && chown -R $USER:$USER linux-5.19.17 && cd ~/kernelbuild1/linux-5.19.17 && make mrproper");
-   
-    system("make mrproper");
-
+    system("mkdir ~/kernelbuild1 && cd /D ~/kernelbuild1 && wget -P ~/kernelbuild1/ https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.19.17.tar.xz && unxz linux-5.19.17.tar.xz && tar -xvf linux-5.19.17.tar && chown -R $USER:$USER linux-5.19.17"); 
+    system("cd ~/kernelbuild1/linux-5.19.17 && make mrproper");
+  
     //Process1
     struct timespec p1start, p1end;
     clock_gettime(CLOCK_REALTIME, &p1start);
