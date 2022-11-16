@@ -43,4 +43,5 @@ int main(){
         p1time = (p1end.tv_sec - p1start.tv_sec) +(p1end.tv_nsec - p1start.tv_nsec) / BILLION;
     }
     printf("%lf \n", p1time);
+
 }
