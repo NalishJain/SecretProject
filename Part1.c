@@ -95,11 +95,12 @@ int main(){
     
     
     
-    // pthread_join(ThreadA, (void **)&r1);
+    pthread_join(ThreadA, NULL);
     // pthread_join(ThreadB, (void **)&r2);
-    pthread_join(ThreadC, (void **)&r3);
+    // pthread_join(ThreadC, (void **)&r3);
 
-    printf("%lf %lf %lf",r1->x,r2->x,r3->x);
+    printf("%lf", r1->x);
+    // printf("%lf %lf %lf",r1->x,r2->x,r3->x);
 
 
 
