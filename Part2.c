@@ -1,6 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/wait.h>
 #include <string.h>
 #include<unistd.h>
 #include <time.h>
@@ -11,7 +8,7 @@ int main(){
 
     system("mkdir ~/kernelbuild1");
     system("cd ~/kernelbuild1");
-    system("wget https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.19.17.tar.xz");
+    system("wget -P ~/kernelbuild1/ https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.19.17.tar.xz");
     system("unxz linux-5.19.17.tar.xz");
     system("tar -xvf linux-5.19.17.tar");
     system("chown -R $USER:$USER linux-5.19.17");
