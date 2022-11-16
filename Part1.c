@@ -33,7 +33,6 @@ void countC(){
 }
 
 void* p1caller(void *f){
-    Double *ptr = (Double*)f;
     struct sched_param paramA;
     paramA.sched_priority = 0;
     pthread_setschedparam(pthread_self(), SCHED_OTHER, &paramA);
@@ -42,8 +41,9 @@ void* p1caller(void *f){
     countA();
     clock_gettime(CLOCK_REALTIME, &end);
     pthread_exit(NULL);
-    // Double *ptr = malloc(sizeof(Double));
+    Double *ptr = malloc(sizeof(Double));
     ptr->x = (end.tv_sec - start.tv_sec) +(end.tv_nsec - start.tv_nsec) / BILLION;
+    printf("%lf\n", ptr->x);
     return (void*)ptr;
 }
 
@@ -60,6 +60,7 @@ void* p2caller(void *f){
     pthread_exit(NULL);
     Double *ptr = malloc(sizeof(Double));
     ptr->x = (end.tv_sec - start.tv_sec) +(end.tv_nsec - start.tv_nsec) / BILLION;
+        printf("%lf\n", ptr->x);
     return (void*)ptr;
 }
 
@@ -76,6 +77,7 @@ void* p3caller(void *f){
     pthread_exit(NULL);
     Double *ptr = malloc(sizeof(Double));
     ptr->x = (end.tv_sec - start.tv_sec) +(end.tv_nsec - start.tv_nsec) / BILLION;
+        printf("%lf\n", ptr->x);
     return (void*)ptr;
 }
 
@@ -88,18 +90,17 @@ int main(){
     Double *r1; 
     Double *r2;
     Double *r3;
-    pthread_create(&ThreadA, NULL, &p1caller,r1);
-    // pthread_create(&ThreadB, NULL, &p2caller, NULL);
-    // pthread_create(&ThreadC, NULL, &p3caller, NULL);
+    pthread_create(&ThreadA, NULL, &p1caller,NULL);
+    pthread_create(&ThreadB, NULL, &p2caller, NULL);
+    pthread_create(&ThreadC, NULL, &p3caller, NULL);
 
     
     
     
-    pthread_join(ThreadA, NULL);
-    // pthread_join(ThreadB, (void **)&r2);
-    // pthread_join(ThreadC, (void **)&r3);
+    pthread_join(ThreadA, (void **)&r1);
+    pthread_join(ThreadB, (void **)&r2);
+    pthread_join(ThreadC, (void **)&r3);
 
-    printf("%lf", r1->x);
     // printf("%lf %lf %lf",r1->x,r2->x,r3->x);
 
 
