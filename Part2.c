@@ -9,13 +9,8 @@
 
 int main(){
 
-    system("mkdir ~/kernelbuild1");
-    chdir("~/kernelbuild1");
-    system("wget -P ~/kernelbuild1/ https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.19.17.tar.xz");
-    system("unxz linux-5.19.17.tar.xz");
-    system("tar -xvf linux-5.19.17.tar");
-    system("chown -R $USER:$USER linux-5.19.17");
-    chdir("~/kernelbuild1/linux-5.19.17");
+    system("mkdir ~/kernelbuild1 && cd /D ~/kernelbuild1 && wget -P ~/kernelbuild1/ https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.19.17.tar.xz && unxz linux-5.19.17.tar.xz && tar -xvf linux-5.19.17.tar && chown -R $USER:$USER linux-5.19.17 && cd ~/kernelbuild1/linux-5.19.17 && make mrproper");
+   
     system("make mrproper");
 
     //Process1
