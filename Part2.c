@@ -9,8 +9,8 @@
 
 int main(){
 
-    system("mkdir ~/kernelbuild1 && cd /D ~/kernelbuild1 && wget -P ~/kernelbuild1/ https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.19.17.tar.xz && unxz linux-5.19.17.tar.xz && tar -xvf linux-5.19.17.tar && chown -R $USER:$USER linux-5.19.17"); 
-    system("cd ~/kernelbuild1/linux-5.19.17 && make mrproper");
+    system("mkdir /home/kernelbuild1 && cd /home/kernelbuild1 && wget -P /home/kernelbuild1/ https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.19.17.tar.xz && unxz linux-5.19.17.tar.xz && tar -xvf linux-5.19.17.tar && chown -R $USER:$USER linux-5.19.17"); 
+    system("cd /home/kernelbuild1/linux-5.19.17 && make mrproper");
   
     //Process1
     struct timespec p1start, p1end;
@@ -25,7 +25,7 @@ int main(){
     else if(rc1 == 0){
 
         char *myargs[2];
-        myargs[0] = strdup("/root/SecretProject/Part2a");
+        myargs[0] = strdup("/home/SecretProject/Part2a");
         myargs[1] = NULL;
         execvp(myargs[0], myargs);
 
