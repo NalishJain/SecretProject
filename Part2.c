@@ -115,4 +115,5 @@ int main(){
         }
         wait(NULL)
     }
+    fclose(fileOutput);
 }
