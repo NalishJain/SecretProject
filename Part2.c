@@ -4,83 +4,115 @@
 #include <string.h>
 #include<unistd.h>
 #include <time.h>
+#include <sched.h>
 
 #define BILLION  1000000000.0
+
+void child(char c, FILE *file) {
+
+
+    double processTime;
+    if(c == 'A'){
+    int rc = fork();
+    struct timespec start, end;
+    struct sched_param paramA;
+    paramA.sched_priority = 0;
+    sched_setscheduler(getpid(), SCHED_OTHER, paramA);
+
+    clock_gettime(CLOCK_REALTIME, &start);
+    if (rc == 0) {
+        exec("/bin/sh","sh","/home/SecretProject/bashscript.sh",NULL);
+    }
+    else if(rc < 0){
+        fprintf(stderr, "fork failed\n");
+        exit(1);    
+    } 
+    else {
+        wait(NULL);
+        clock_gettime(CLOCK_REALTIME, &end);
+        processTime = (end.tv_sec - start.tv_sec)  + (end.tv_nsec - start.tv_nsec) / BILLION;
+        printf("A-processTime %lf \n", processTime);
+        fprintf(file,"%s", "A-processTime ");
+        fprintf(file, "%lf\n", processTime);
+    }
+    }
+    if(c == 'B'){
+    int rc = fork();
+    struct sched_param paramB;
+    paramB.sched_priority = 1;
+    sched_setscheduler(getpid(), SCHED_FIFO, paramB);
+    struct timespec start, end;
+    clock_gettime(CLOCK_REALTIME, &start);
+    if (rc == 0) {
+        exec("/bin/sh","sh","/home/SecretProject/bashscript2.sh",NULL);
+    } 
+    else if(rc < 0){
+        fprintf(stderr, "fork failed\n");
+        exit(1);    
+    } 
+    else {
+        wait(NULL);
+        clock_gettime(CLOCK_REALTIME, &end);
+        processTime = (end.tv_sec - start.tv_sec)  + (end.tv_nsec - start.tv_nsec) / BILLION;
+        printf("B-processTime %lf \n", processTime);
+        fprintf(file,"%s", "B-processTime ");
+        fprintf(file, "%lf\n", processTime);
+    }       
+    }
+    if(c == 'C'){
+    int rc = fork();
+
+    struct timespec start, end;
+
+    struct sched_param paramC;
+    paramC.sched_priority = 1;
+    sched_setscheduler(getpid(), SCHED_RR, paramC);
+
+    clock_gettime(CLOCK_REALTIME, &start);
+    if (rc == 0) {
+        exec("/bin/sh","sh","/home/SecretProject/bashscript3.sh",NULL);
+    }
+    else if(rc < 0){
+        fprintf(stderr, "fork failed\n");
+        exit(1);    
+    } 
+    else {
+        wait(NULL);
+        clock_gettime(CLOCK_REALTIME, &end);
+        processTime = (end.tv_sec - start.tv_sec)  + (end.tv_nsec - start.tv_nsec) / BILLION;
+        printf("C-processTime %lf \n", processTime);
+        fprintf(file,"%s", "C-processTime ");
+        fprintf(file, "%lf\n", processTime);
+    }       
+    }
+}
 
 int main(){
 
   
     //Process1
-    struct timespec p1start, p1end;
-    struct timespec p2start, p2end;
-    struct timespec p3start, p3end;
 
-    clock_gettime(CLOCK_REALTIME, &p1start);
-    int rc1 = fork();
-    double p1time;
-    double p2time;
-    double p3time;
+    FILE *fileOutput;
+    fileOutput = fopen("/home/SecretProject/result.txt","w");
 
-    if(rc1 < 0){
-        fprintf(stderr, "fork failed\n");
-        exit(1);
-    }
-    else if(rc1 == 0){
 
-        char *myargs[2];
-        myargs[0] = strdup("/home/SecretProject/bashscript.sh");
-        myargs[1] = NULL;
-        execvp(myargs[0], myargs);
-        exit(0);
-
-    }
-    else{
-        // int rc1_wait = wait(NULL);
-        clock_gettime(CLOCK_REALTIME, &p2start);
+    int rc = fork();
+    if (rc == 0) {
+        child('A', fileOutput);
+    } 
+    else {
         int rc2 = fork();
-        if(rc2 < 0){
-            fprintf(stderr, "fork failed\n");
-            exit(1);
-        }
-        else if(rc2 == 0){
-
-            char *myargs2[2];
-            myargs2[0] = strdup("/home/SecretProject/bashscript2.sh");
-            myargs2[1] = NULL;
-            execvp(myargs2[0], myargs2);
-            exit(0);
-
-        }
-        else{
-            clock_gettime(CLOCK_REALTIME, &p3start);
+        if (rc2 == 0) {
+            child('B', fileOutput);
+        } 
+        else {
             int rc3 = fork();
-            if(rc3 < 0){
-                fprintf(stderr, "fork failed\n");
-                exit(1);
+            if (rc3 == 0) {
+                child('C', fileOutput);
             }
-            else if(rc3 == 0){
-                char *myargs3[2];
-                myargs3[0] = strdup("/home/SecretProject/bashscript3.sh");
-                
-                myargs3[1] = NULL;
-                // execl("/bin/sh","sh","path to bachscript",NULL);
-                execv(myargs3[0], myargs3);
-                exit(0);
-            }  
-            else{
-                int rc3_wait = wait(NULL); 
-                clock_gettime(CLOCK_REALTIME, &p3end);         
-                p3time = (p3end.tv_sec - p3start.tv_sec) + (p3end.tv_nsec - p3start.tv_nsec) / BILLION;
-            }
-            int rc2_wait = wait(NULL);
-            clock_gettime(CLOCK_REALTIME, &p2end);         
-            p2time = (p2end.tv_sec - p2start.tv_sec) +(p2end.tv_nsec - p2start.tv_nsec) / BILLION;
-
+            // sched_setscheduler(getpid(), SCHED_OTHER, param);
+            wait(NULL)
         }
-        int rc1_wait = wait(NULL);
-        clock_gettime(CLOCK_REALTIME, &p1end);
-        p1time = (p1end.tv_sec - p1start.tv_sec) +(p1end.tv_nsec - p1start.tv_nsec) / BILLION;
+        wait(NULL)
     }
-    // clock_gettime(CLOCK_REALTIME, &p1end);
-    printf("%lf %lf %lf \n", p1time, p2time, p3time);
 }
