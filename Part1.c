@@ -6,28 +6,29 @@
 #include <limits.h>
 #include <math.h>
 #include <sched.h>
+
 #define BILLION  1000000000.0
 
 typedef struct { double x; } Double;
 
 
 void countA(){
-    int count = 0;
-    for(int i = 0; i < UINT_MAX; i++){
+    unsigned int count = 0;
+    for(unsigned int i = 0; i < UINT_MAX; i++){
         count++;
     }
 }
 
 void countB(){
-    int count = 0;
-    for(int i = 0; i < UINT_MAX; i++){
+     unsigned int count = 0;
+    for( unsigned int i = 0; i < UINT_MAX; i++){
         count++;
     }
 }
 
 void countC(){
-    int count = 0;
-    for(int i = 0; i < UINT_MAX; i++){
+     unsigned int count = 0;
+    for( unsigned int i = 0; i < UINT_MAX; i++){
         count++;
     }
 }
